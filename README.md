@@ -1,11 +1,13 @@
 Uvic Co-op Work Term Template
 =============
-A set of LaTeX files that generates a work term report following the Uvic co-op department's [style guide](https://www.uvic.ca/coopandcareer/assets/docs/studentsalumni/engineering_work_term_report_guide.pdf). 
+A set of LaTeX files that generates a work term report following the Uvic co-op department's [style guide](https://www.uvic.ca/coopandcareer/assets/docs/studentsalumni/engineering_work_term_report_guide.pdf). A [full installation of LaTeX](http://latex-project.org/ftp.html) is assumed regarding the packages included in the document.
 
 The end goal of this project is to create an encaspulated style file and guidebook that will be used by other students for their work term reports.
 
-### v 0.1
-This distribution is intended to ellicit feedback regarding usability and, hopefully, bring any bugs to light. As is, the template will generate a report that meets all of the style guidelines. Bibliographies are handled by BibLatex (here's a [tutorial](https://www.youtube.com/watch?v=-UVp9ItOc4A)).
+### v 0.1.1
+This distribution is intended to ellicit feedback regarding usability and, hopefully, bring any bugs to light. Bibliographies are handled by BibLatex (here's a [tutorial](https://www.youtube.com/watch?v=-UVp9ItOc4A)).
+
+The included files should compile and produce pdfs that match their __demo_ counterparts.
 
 Send feedback via Github through @trstephen or via [email](mailto:tstephen@uvic.ca).
 
