@@ -4,29 +4,34 @@ A set of LaTeX files that generates a work term report following the Uvic co-op 
 
 The end goal of this project is to create an encaspulated style file and guidebook that will be used by other students for their work term reports.
 
-### v 0.1.1
 This distribution is intended to ellicit feedback regarding usability and, hopefully, bring any bugs to light. Bibliographies are handled by BibLatex (here's a [tutorial](https://www.youtube.com/watch?v=-UVp9ItOc4A)).
 
-The included files should compile and produce pdfs that match their __demo_ counterparts.
+The included files should compile and produce pdfs that match their *_demo* counterparts.
 
 Send feedback via Github through @trstephen or via [email](mailto:tstephen@uvic.ca).
 
+### v 0.2
+#####Changes
+* Appendices are no longer handled by a custom environment but with custom commands. This resolves the issue where the last page of the appendix would not follow the proper numbering scheme.
+	* `tocloft` and `appendix` have been removed as default packages since they were used to solve this problem
+* The margins may be changed to 1" by uncommending the line `hmargin=1in,` in the `\geometry` setup.
+* The `Note` field of the bibliography holds the _Last Accessed_ date. 
+
 #####Known issues
 * BibLatex does not handle online citations nicely. See the .bib file for a workaround
-* A trailing blank page is used to fix the page numbering for appendices. This will print without wasting any resources, but it should be eliminated.
 
 ##TODO:
 * Appendix
-  * fix blank page workaround for last page number
+  * ~~fix blank page workaround for last page number~~
 * Title Page
   * maybe do the same import thing as the letter
-  * recreate the approval graphic in situ
+  * ~~recreate the approval graphic in situ~~
   * make the approval box *prettier* 
     * less top/bottom padding
     * box is longer than pagewidth
     * fields are aligned (table?)
 * Layout
-  * Change padewidth? It's the "proper" way according to various typography style guides but official style guide specifies a 1" margin.
+  * ~~Change padewidth? It's the "proper" way according to various typography style guides but official style guide specifies a 1" margin.~~ 
 * References
   * find out how URLs\webpages are displayed in ieeetr
     * works with @misc entry but it's clunky. Requires manual entry of \url{} and does not display last accessed date. May have to install another bib style

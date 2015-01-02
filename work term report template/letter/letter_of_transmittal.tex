@@ -1,12 +1,25 @@
+%/////////////////////////////////////////////////////////%
+%		   
+% file: 	letter_of_transmittal.tex
+% version:	0.2 
+% modified:	2014-12-26
+% author:	Tyler Stephen (tstephen@uvic.ca)
+% descr:	Generates a .pdf file that is included in 
+%			wt_template.tex as the letter of transmittal.
+%
+%/////////////////////////////////////////////////////////%
+
 \documentclass[11pt]{letter}
 
-\longindentation=0pt				% address and signature left aligned
+%\longindentation=0pt				% closing is flush left
+\usepackage[inline]{enumitem}		% only included for demo letter -- delete it
 
 \signature
 	{	% my signature
 		Your Name \\ 
 		University of Victoria \\ 
-		Something Engineering student
+		Something Engineering student \\
+		Term XX  % e.g. 2A
 	}
 \address
 	{	% my address
@@ -30,9 +43,10 @@
 
 \opening{Dear My Coordinator}
 
-Here is a letter.
-
-It has two paragraphs. Wow!
+Here is a bunch of stuff to include in the letter:
+\begin{enumerate*}[label=(\roman*)]
+	\item The title of the report	\item  Your work term number (first, second, third, etc.)	\item  Your year and discipline, eg. 3A Mechanical, 2B Electrical	\item  The name and location of your employer	\item  The main activity of your employer	\item  Your project or area of work	\item  The scope of the report, i.e. what facets of the problem are discussed	\item  Disclaimers, special problems encountered, or extenuating circumstances, if applicable	\item  A statement that the report is confidential, if it is	\item  Acknowledgements of helpful people, groups or organizations	\item  Any other features that may be of interest to the reader.
+\end{enumerate*}
 
 \closing{Yours faithfully,}
 
