@@ -1,17 +1,30 @@
+%/////////////////////////////////////////////////////////%
+%		   
+% file: 	wt_template.tex
+% version:	0.2 
+% modified:	2014-12-25
+% author:	Tyler Stephen (tstephen@uvic.ca)
+% descr:	A document that follows the University of Victoria
+%			style guide for work term reports. The letter of
+%			transmittal is included from a separately generated
+%			pdf.
+%
+%/////////////////////////////////////////////////////////%
 %%% TODO:
 % Appendix
 %		XXX remove page numbers from ToC 
 %		XXX fix last page number of appendix (does not follow Letter - number format)
-%		fix blank page workaround for last page number
+%		XXX fix blank page workaround for last page number
 % XXX Letter of Transmittal
 %		XXX import from another file is probably easiest
 % Title Page
-%		maybe do the same import thing as the letter
+%		XXX maybe do the same import thing as the letter
 %		XXX recreate the approval graphic in situ
 %		make the approval box prettier~*~*~ 
 %			less top/bottom padding
-%			box is longer than pagewidth
+%			XXX box is longer than pagewidth
 %			fields are aligned (table?)
+%		anchor the approval box to the bottom
 % References
 %		XXX learn how they work
 %		XXX find out how URLs\webpages are displayed in ieeetr
@@ -35,8 +48,8 @@
 			amsmath,			% math operators
 			amssymb,			% math symbols
 %			amsthm,				% theorem environment
-%			xfrac,				% fancy fractions
 %			soul,				% strike through with \st{}
+%			xfrac,				% fancy fractions
 			}		
 
 %% Graphics
@@ -56,34 +69,27 @@
 
 %% Layout Alteration
 %% --------------------------
-\usepackage{
-			framed,				% nice boxes; used in Supervisor's Approval
-%			tocloft,			
-%			lastpage,			% used with (fancyhdr)
-%			fancyhdr,			% see config in LAYOUT AND STYLING
-%			fullpage,			% set full page margins
-%			geometry,			% change the margins for specific PAGES
-%			changepage			% change margins for PARTS of pages with (adjustwidth)
-%			rotating,			% sideways figures
-%			pdflscape,			% ???
-%			parskip,			% disable indents
+\usepackage{			
 %			caption,			% line breaks in captions with \\
+%			changepage,			% change margins for PARTS of pages with (adjustwidth)
+%			fancyhdr,			% see config in LAYOUT AND STYLING
+			framed,				% nice boxes; used in Supervisor's Approval
+%			fullpage,			% set full page margins
+			geometry,			% change the margins for specific PAGES
+%			lastpage,			% used with (fancyhdr)
+%			parskip,			% disable indents
+%			pdflscape,			% ???
+%			rotating,			% sideways figures
 			}
-\usepackage[
-			title, 				% "Appendix" before section headings
-			titletoc,			% "Appendix" before sections in the ToC
-			]{appendix}			% functionality for appendices
-			
-\usepackage[					% if (subfigure) is already defined, there is a clash
-			subfigure,			% where the lof/t depth is defined twice. this option 
-								% deconflicts the error.
-			]{tocloft}			% better control over ToC, LoF, LoT formatting
+\geometry{						% specify page size options for (geometry)
+			a4paper, 			% paper size
+%			hmargin=1in,		% horizontal margins
+		 }				
 
 %% Units
 %% --------------------------
 \usepackage{
 			siunitx,			% has S (decimal align) column type
-%			cancel,				% ???
 			}
 \sisetup{input-symbols = {()},  % do not treat "(" and ")" in any special way
          group-digits  = false, % no grouping of digits
@@ -94,7 +100,6 @@
 %% Misc
 %% --------------------------
 \usepackage{
-%			standalone,			% \include works with documents of a different class
 			pdfpages,			% import pdfs into this document -- used for the Letter
 			url,				% allows urls to be added to document
 			}	
@@ -108,44 +113,37 @@
 \providecommand{\e}[1]{\ensuremath{\times 10^{#1}}}
 
 % override S column type with centered text column
-\newcommand{\textcol}[1]{\multicolumn{1}{c}{#1}}
+\providecommand{\textcol}[1]{\multicolumn{1}{c}{#1}}
 
 % easy unit spacing in math mode
 \providecommand{\units}[1]{\;\text{#1}}
 
 % provides a place to write on documents; like __________________ that
-\newcommand{\blankline}{\underline{\hspace{2.5cm}}}
+\providecommand{\blankline}{\underline{\hspace{3cm}}}
+
+% Set up page numbering for appendices as (Appendix Letter) - (Page Number)
+\providecommand{\StartAppendices}{
+    \newpage
+    \newcounter{AppendixCounter}	
+    \renewcommand{\thepage}{\Alph{AppendixCounter} - \arabic{page}}
+}
 	
-% Appendix sections have the page numbers as (Appendix Letter) - (Page Number)
-\newcommand{\appendixitem}[1]{
-	\clearpage				% start on a new page
-	\setcounter{page}{1}	% reset page counter
-	\renewcommand{\thepage}{\thesection{} - \arabic{page}}
-	\section{#1}
+% Manually construct the section title for each appendix and then
+% add an entry to the ToC 
+\providecommand{\Appendix}[1]{
+    \newpage
+    \stepcounter{AppendixCounter}
+    \setcounter{page}{1}
+    \section*{Appendix \Alph{AppendixCounter}\quad #1}
+    \addtocontents{toc}{\protect\contentsline{section}%
+    	{Appendix \Alph{AppendixCounter}\quad #1}{}}
+	% \protect preserves the spacing in the ToC
 }
 
 
 %%%%%%%%%%%%%%%%%%%%%%%
 % 	Environments
 %%%%%%%%%%%%%%%%%%%%%%%
-
-% this is a wrapper for the (appendices) environment
-% it prevents page numbers being added to the ToC for the appendices.
-% A trailing blank page is printed. This fixes a problem with the
-% page ordering from the \appendixitem command
-\newenvironment{Appendices}
-	{ % beginning formatting
-		\begin{appendices}
-		\addtocontents{toc}{\cftpagenumbersoff{section}}
-	}
-	{ % end formatting
-		% this sequence fixes the numbering for a solo, last appendix
-		% by printing a blank page, the numbering is (somehow???) fixed
-		\newpage \null 
-		\pagenumbering{gobble}
-		\addtocontents{toc}{\cftpagenumberson{section}}
-		\end{appendices}
-	}
 
 % Cleans up the nested environments used to create the approval box
 % on the title page
@@ -157,7 +155,7 @@
 		\begin{small}
 	}
 	{ % end formatting
-		% the {small} environment does not need to be ended :O
+		\end{small}
 		\end{flushleft}
 		\end{scriptsize}
 		\end{framed}
@@ -166,12 +164,12 @@
 % Hides the formatting for the summary
 \newenvironment{Summary}
 	{ % beginning formatting
-		% manually add entry to the toc since *
+		% manually add entry to the toc since section*
 		% suppresses addition to toc 
-		\addcontentsline{toc}{section}{Summary}
+		\addcontentsline{toc}{section}{Summary}	
 		\topskip0pt				% remove top padding
 		\vspace*{\stretch{2}}	% Pad 2/3 of the page length
-		\section*{Summary}		% don't create a ToC entry!
+		\section*{Summary}		% don't append a section number before "Summary"
 	}
 	{ % end formatting
 		\vspace*{\stretch{3}}
@@ -181,7 +179,7 @@
 \newenvironment{Glossary}
 	{ 	%beginning formatting
 		\addcontentsline{toc}{section}{Glossary}	
- 		\section*{Glossary}
+ 		\section*{Glossary}		
 		\begin{description}
 	}
 	{
@@ -197,7 +195,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%
 % 	  Title Page
 %%%%%%%%%%%%%%%%%%%%%%%
-\pagenumbering{gobble}	% turn off page numbering
+\pagenumbering{gobble}		% turn off page numbering
+\newgeometry{hmargin=3cm}	% wider margins to accommodate approval box
 \begin{center}
 University of Victoria\\
 Faculty of Engineering\\
@@ -223,22 +222,25 @@ yourname@uvic.ca\\
 
 In partial fulfillment of the requirements of the\\
 Bachelor of Engineering Degree\\
-\vspace{1cm}
+\vspace{4cm}
 
-\end{center}
+
 
 \begin{ApprovalBox}
-	\textbf{Supervisor's approval: To be completed by the Co-Op Employer} \newline\newline
-	\end{small}
+	\textbf{Supervisor's approval: To be completed by the Co-Op Employer} 
+	\newline\newline
 	I approve the release of this report to the University of Victoria for evaluation purposes only. 
 	\newline\newline
 	The report is to be considered: \quad $\square${} NOT CONFIDENTIAL \quad $\square${} CONFIDENTIAL
 	\newline\newline
 	Signature: \blankline{} Position: \blankline{} Date: \blankline{} \newline\newline
-	Name (print): \blankline{} E-Mail: \blankline{} Fax \#: \blankline 
+	Name (print): \blankline{} E-Mail: \blankline{} Fax \#: \blankline{} 
 	\newline\newline
 	If a report is deemed CONFIDENTIAL, a non-disclosure form signed by an evaluator will be faxed to the employer. The report will be destroyed following evaluation. If the report is NOT CONFIDENTIAL, it will be returned to the student following evaluation.
 \end{ApprovalBox}
+
+\end{center}
+\restoregeometry		% back to a4 size
 
 %%%%%%%%%%%%%%%%%%%%%%%
 % Letter of Transmittal
@@ -322,21 +324,24 @@ Recommendations are an outline of what further work needs to be done based solid
 \addcontentsline{toc}{section}{References}
 \bibliographystyle{ieeetr}
 \bibliography{wt_template}
-% Update entries in bibdesk
+% Update entries in bibdesk using texshop to typeset
 % typsetting: 1) latex 2) bibdesk 3) latex 4) latex
 
 
 %%%%%%%%%%%%%%%%%%%%%%%
 % 	   Appendices
 %%%%%%%%%%%%%%%%%%%%%%%
-\newpage
-\begin{Appendices}
 
-\appendixitem{My appendix}
-\appendixitem{Another appendix}
+\StartAppendices
+
+\Appendix{My appendix}
+Here is some text for my appendix.
+
+\Appendix{Another appendix}
+Here is another appendix. It has multiple pages. Watch the page numbering.
 \newpage \null
-\appendixitem{Last appendix}
 
-\end{Appendices}
+\Appendix{Last appendix}
+This is the last appendix.
 
 \end{document}
