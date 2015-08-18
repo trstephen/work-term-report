@@ -1,8 +1,8 @@
 %/////////////////////////////////////////////////////////%
 %		   
 % file: 	wt_template.tex
-% version:	0.2 
-% modified:	2014-12-25
+% version:	0.3
+% modified:	2015-05-12
 % author:	Tyler Stephen (tstephen@uvic.ca)
 % descr:	A document that follows the University of Victoria
 %			style guide for work term reports. The letter of
@@ -28,7 +28,7 @@
 % References
 %		XXX learn how they work
 %		XXX find out how URLs\webpages are displayed in ieeetr
-%			works with @misc entry but it's clunky. Manual entry of \url and
+%		XXX works with @misc entry but it's clunky. Manual entry of \url and
 %			does not display last accessed date. May have to install another bib style
 
 
@@ -63,8 +63,8 @@
 %% Tables
 %% --------------------------
 \usepackage{
-			booktabs,			% better tables, discourages vertical rulings		
-			multicol,			% allow multi columns	
+			booktabs,			% better tables, discourages vertical rulings
+			multicol,			% allow multi columns
 			}
 
 %% Layout Alteration
@@ -102,7 +102,15 @@
 \usepackage{
 			pdfpages,			% import pdfs into this document -- used for the Letter
 			url,				% allows urls to be added to document
-			}	
+			}
+
+%% Bibliography
+%% --------------------------	
+\usepackage[
+	backend=biber,
+	style=ieee]
+{biblatex}
+\addbibresource{wt_template.bib}
 			
 			 
 %%%%%%%%%%%%%%%%%%%%%%%
@@ -314,19 +322,15 @@ Conclusions are the results derived from the evidence provided in the discussion
 When presenting more than one conclusion, state the main conclusion first followed by the others in the order of decreasing importance, to ensure the maximum impact on the reader.
 
 \section{Recommendation}
-Recommendations are an outline of what further work needs to be done based solidly on the information you previously presented in the report. They have the greatest impact when written using action verbs. Again, do not introduce new material or concepts here\cite{fb}\cite{goog}\cite{uvic}.
+Recommendations are an outline of what further work needs to be done based solidly on the information you previously presented in the report\cite{einstein}. They have the greatest impact when written using action verbs. Again, do not introduce new material or concepts here\cite{knuth-fa, knuthwebsite}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%
 % 	  Referrences
 %%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\addcontentsline{toc}{section}{References}
-\bibliographystyle{ieeetr}
-\bibliography{wt_template}
-% Update entries in bibdesk using texshop to typeset
-% typsetting: 1) latex 2) bibdesk 3) latex 4) latex
-
+\renewcommand*{\UrlFont}{\rmfamily} % preserve default font for URLs
+\printbibliography[heading=bibintoc,title={References}]
 
 %%%%%%%%%%%%%%%%%%%%%%%
 % 	   Appendices
