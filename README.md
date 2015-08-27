@@ -4,8 +4,6 @@ A set of LaTeX files that generates a work term report following the Uvic co-op 
 
 The end goal of this project is to create an encaspulated style file and guidebook that will be used by other students for their work term reports. This distribution is intended to ellicit feedback regarding usability and, hopefully, bring any bugs to light.
 
-Bibliographies are handled by BibLatex (here's a [tutorial](https://www.youtube.com/watch?v=-UVp9ItOc4A)).
-
 The included files should compile and produce pdfs that match their *_demo* counterparts.
 
 Send feedback via Github through @trstephen or via [email](mailto:tstephen@uvic.ca).
