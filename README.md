@@ -11,6 +11,10 @@ The included files should compile and produce pdfs that match their *_demo* coun
 Send feedback via Github through @trstephen or via [email](mailto:tstephen@uvic.ca).
 
 ### Changes
+##### v 0.4
+* Broke the text into separate .tex files that are pulled into the main document with `\include{}` calls. This should make it easier to manage large reports since the preamble, etc can be left in the main document and ignored.
+* `description` environment used for the glossary is controlled by the `enumitem` package. Entries are bold and the description follows on the next line with a leading indent.
+
 ##### v 0.3
 * Bibliography handled by `Biber` and `BibLatex`
 
@@ -19,19 +23,3 @@ Send feedback via Github through @trstephen or via [email](mailto:tstephen@uvic.
 	* `tocloft` and `appendix` have been removed as default packages since they were used to solve this problem
 * The margins may be changed to 1" by uncommenting the line `hmargin=1in,` in the `\geometry` setup.
 * The `Note` field of the bibliography holds the _Last Accessed_ date.
-
-#### TODO
-* Appendix
-  * ~~fix blank page workaround for last page number~~
-* Title Page
-  * maybe do the same import thing as the letter
-  * ~~recreate the approval graphic in situ~~
-  * make the approval box *prettier*
-    * less top/bottom padding
-    * box is longer than pagewidth
-    * fields are aligned (table?)
-* Layout
-  * ~~Change padewidth? It's the "proper" way according to various typography style guides but official style guide specifies a 1" margin.~~
-* ~~References~~
-  * ~~find out how URLs\webpages are displayed in ieeetr~~
-    * ~~works with @misc entry but it's clunky. Requires manual entry of \url{} and does not display last accessed date. May have to install another bib style~~

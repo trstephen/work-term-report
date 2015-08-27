@@ -1,8 +1,8 @@
 %/////////////////////////////////////////////////////////%
 %		   
 % file: 	wt_template.tex
-% version:	0.3
-% modified:	2015-05-12
+% version:	0.4
+% modified:	2015-08-17
 % author:	Tyler Stephen (tstephen@uvic.ca)
 % descr:	A document that follows the University of Victoria
 %			style guide for work term reports. The letter of
@@ -10,26 +10,6 @@
 %			pdf.
 %
 %/////////////////////////////////////////////////////////%
-%%% TODO:
-% Appendix
-%		XXX remove page numbers from ToC 
-%		XXX fix last page number of appendix (does not follow Letter - number format)
-%		XXX fix blank page workaround for last page number
-% XXX Letter of Transmittal
-%		XXX import from another file is probably easiest
-% Title Page
-%		XXX maybe do the same import thing as the letter
-%		XXX recreate the approval graphic in situ
-%		make the approval box prettier~*~*~ 
-%			less top/bottom padding
-%			XXX box is longer than pagewidth
-%			fields are aligned (table?)
-%		anchor the approval box to the bottom
-% References
-%		XXX learn how they work
-%		XXX find out how URLs\webpages are displayed in ieeetr
-%		XXX works with @misc entry but it's clunky. Manual entry of \url and
-%			does not display last accessed date. May have to install another bib style
 
 
 %/////////////////////////////////////////////////////////%
@@ -47,9 +27,7 @@
 \usepackage{
 			amsmath,			% math operators
 			amssymb,			% math symbols
-%			amsthm,				% theorem environment
-%			soul,				% strike through with \st{}
-%			xfrac,				% fancy fractions
+			wasysym,			% Square and XBox for approval form
 			}		
 
 %% Graphics
@@ -70,20 +48,14 @@
 %% Layout Alteration
 %% --------------------------
 \usepackage{			
-%			caption,			% line breaks in captions with \\
-%			changepage,			% change margins for PARTS of pages with (adjustwidth)
-%			fancyhdr,			% see config in LAYOUT AND STYLING
+			enumitem,			% indented items for glossary
 			framed,				% nice boxes; used in Supervisor's Approval
-%			fullpage,			% set full page margins
 			geometry,			% change the margins for specific PAGES
-%			lastpage,			% used with (fancyhdr)
-%			parskip,			% disable indents
-%			pdflscape,			% ???
-%			rotating,			% sideways figures
 			}
+\setlist[description]{style=nextline} 
 \geometry{						% specify page size options for (geometry)
 			a4paper, 			% paper size
-%			hmargin=1in,		% horizontal margins
+			margin=1in,			% specified independently with hmargin vmargin
 		 }				
 
 %% Units
@@ -103,7 +75,7 @@
 			pdfpages,			% import pdfs into this document -- used for the Letter
 			url,				% allows urls to be added to document
 			}
-
+			
 %% Bibliography
 %% --------------------------	
 \usepackage[
@@ -123,11 +95,8 @@
 % override S column type with centered text column
 \providecommand{\textcol}[1]{\multicolumn{1}{c}{#1}}
 
-% easy unit spacing in math mode
-\providecommand{\units}[1]{\;\text{#1}}
-
 % provides a place to write on documents; like __________________ that
-\providecommand{\blankline}{\underline{\hspace{3cm}}}
+\providecommand{\blankline}{\rule{3cm}{0.5pt}}
 
 % Set up page numbering for appendices as (Appendix Letter) - (Page Number)
 \providecommand{\StartAppendices}{
@@ -147,7 +116,6 @@
     	{Appendix \Alph{AppendixCounter}\quad #1}{}}
 	% \protect preserves the spacing in the ToC
 }
-
 
 %%%%%%%%%%%%%%%%%%%%%%%
 % 	Environments
@@ -187,7 +155,7 @@
 \newenvironment{Glossary}
 	{ 	%beginning formatting
 		\addcontentsline{toc}{section}{Glossary}	
- 		\section*{Glossary}		
+ 		\section*{Glossary}	
 		\begin{description}
 	}
 	{
@@ -204,7 +172,7 @@
 % 	  Title Page
 %%%%%%%%%%%%%%%%%%%%%%%
 \pagenumbering{gobble}		% turn off page numbering
-\newgeometry{hmargin=3cm}	% wider margins to accommodate approval box
+
 \begin{center}
 University of Victoria\\
 Faculty of Engineering\\
@@ -230,7 +198,7 @@ yourname@uvic.ca\\
 
 In partial fulfillment of the requirements of the\\
 Bachelor of Engineering Degree\\
-\vspace{4cm}
+\vfill
 
 
 
@@ -239,7 +207,7 @@ Bachelor of Engineering Degree\\
 	\newline\newline
 	I approve the release of this report to the University of Victoria for evaluation purposes only. 
 	\newline\newline
-	The report is to be considered: \quad $\square${} NOT CONFIDENTIAL \quad $\square${} CONFIDENTIAL
+	The report is to be considered: \quad \Square{} NOT CONFIDENTIAL \quad \Square{} CONFIDENTIAL
 	\newline\newline
 	Signature: \blankline{} Position: \blankline{} Date: \blankline{} \newline\newline
 	Name (print): \blankline{} E-Mail: \blankline{} Fax \#: \blankline{} 
@@ -248,18 +216,13 @@ Bachelor of Engineering Degree\\
 \end{ApprovalBox}
 
 \end{center}
-\restoregeometry		% back to a4 size
 
 %%%%%%%%%%%%%%%%%%%%%%%
-% Letter of Transmittal
+%    Front matter
 %%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \includepdf{letter/letter_of_transmittal}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%
-%  Tables of Contents
-%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \addtocontents{toc}{~\hfill\textbf{Page}\par}	% 'Page' above the page numbers
 \tableofcontents
@@ -275,23 +238,8 @@ Bachelor of Engineering Degree\\
 \addtocontents{lot}{~\hfill\textbf{Page}\par}
 \listoftables
 
-%%%%%%%%%%%%%%%%%%%%%%%
-% 		Summary
-%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
-
-\begin{Summary}
-The summary is written for the general reader who wishes to be familiar with the content of the report while avoiding details. The summary is a separate report, stating the engineering problem, the approach to the solution, the main conclusions and recommendations. It is written after the main report has been completed. Items in the main report such as tables, figures or sections, are not referred to in the summary. The summary is normally presented centered on its own page, and is less than one page in length.
-\end{Summary}
-
-%%%%%%%%%%%%%%%%%%%%%%%
-% 		Glossary
-%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
-
-\begin{Glossary}
-	\item[Uvic] University of Victoria
-\end{Glossary}
+\include{sections/summary}
+\include{sections/glossary}
 
 %%%%%%%%%%%%%%%%%%%%%%%
 %		Main Body
@@ -299,30 +247,7 @@ The summary is written for the general reader who wishes to be familiar with the
 \newpage
 \pagenumbering{arabic}	% 1, 2, 3, ... page numbering
 
-\section{Introduction}
-The introduction introduces the report to the reader by:
-\begin{itemize}
-	\item making a few background statements about the company/organization
-	\item introducing the subject to be discussed
-	\item mentioning why the subject is important
-	\item outlining the content of the rest of the report.
-	\item containing sufficient background information for the reader to understand the rest of the
-report.
-\end{itemize}
-Introductions should never be longer than the discussion. If a significant amount of background information is required, some of the material may be included as appendices.
-The introductory material may be presented in several sections to cover the scope of the report as well as provide the necessary background information. In the sample Table of Contents, the introductory portion is contained in sections 1 through 4.
-
-\section{Discussion}
-The discussion is the foundation of a report. It presents evidence in the form of referenced facts, data, test results, and analysis upon which the conclusions are based. A well-written discussion flows logically from concept to concept to lead the reader to the appropriate conclusions.
-The discussion may contain several sections if several concepts are presented. In the sample Table of Contents, the discussion is contained in subsections 5.1 through 5.5.
-
-\section{Conclusion}
-Conclusions are the results derived from the evidence provided in the discussion. No new material is presented in the conclusion.
-\subsection{sub conclusion}
-When presenting more than one conclusion, state the main conclusion first followed by the others in the order of decreasing importance, to ensure the maximum impact on the reader.
-
-\section{Recommendation}
-Recommendations are an outline of what further work needs to be done based solidly on the information you previously presented in the report\cite{einstein}. They have the greatest impact when written using action verbs. Again, do not introduce new material or concepts here\cite{knuth-fa, knuthwebsite}
+\include{sections/body}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%
@@ -333,19 +258,10 @@ Recommendations are an outline of what further work needs to be done based solid
 \printbibliography[heading=bibintoc,title={References}]
 
 %%%%%%%%%%%%%%%%%%%%%%%
-% 	   Appendices
+% 	  Back Matter
 %%%%%%%%%%%%%%%%%%%%%%%
 
 \StartAppendices
-
-\Appendix{My appendix}
-Here is some text for my appendix.
-
-\Appendix{Another appendix}
-Here is another appendix. It has multiple pages. Watch the page numbering.
-\newpage \null
-
-\Appendix{Last appendix}
-This is the last appendix.
+\include{sections/appendix}
 
 \end{document}
