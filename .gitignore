@@ -1,3 +1,4 @@
+# compiled output
 *.aux
 *.bbl
 *.blg
@@ -6,10 +7,11 @@
 *.lot
 *.gz
 *.toc
-guide/
-refs/
 *.xml
 *.bst
 *-blx.bib
 *.bcf
 wt_template.pdf
+
+# unsynced directories
+_*
