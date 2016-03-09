@@ -79,7 +79,7 @@
 \providecommand{\textcol}[1]{\multicolumn{1}{c}{#1}}
 
 % provides a place to write on documents; like __________________ that
-\providecommand{\blankline}{\rule{3cm}{0.5pt}}
+\providecommand{\blankline}[1]{\rule{#1}{0.5pt}}
 
 % Set up page numbering for appendices as (Appendix Letter) - (Page Number)
 \providecommand{\StartAppendices}{
@@ -103,23 +103,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%
 % 	Environments
 %%%%%%%%%%%%%%%%%%%%%%%
-
-% Cleans up the nested environments used to create the approval box
-% on the title page
-\newenvironment{ApprovalBox}
-	{ % beginning formatting
-		\begin{framed}			
-		\begin{scriptsize}
-		\begin{flushleft}
-		\begin{small}
-	}
-	{ % end formatting
-		\end{small}
-		\end{flushleft}
-		\end{scriptsize}
-		\end{framed}
-	}
-
 % Hides the formatting for the summary
 \newenvironment{Summary}
 	{ % beginning formatting
@@ -155,50 +138,7 @@
 % 	  Title Page
 %%%%%%%%%%%%%%%%%%%%%%%
 \pagenumbering{gobble}		% turn off page numbering
-
-\begin{center}
-University of Victoria\\
-Faculty of Engineering\\
-Date Work Term Report\\
-\vspace{1cm}
-
-{\huge Name of your report}\\
-\vspace{1cm}
-
-Employer name \\
-Employer address\\
-\vspace{1cm}
-
-Your Name\
-V00XXXXXX\\
-Work Term X\\
-Something Engineering\\
-yourname@uvic.ca\\
-\vspace{0.5cm}
-
-\today \\
-\vspace{1cm}
-
-In partial fulfillment of the requirements of the\\
-Bachelor of Engineering Degree\\
-\vfill
-
-
-
-\begin{ApprovalBox}
-	\textbf{Supervisor's approval: To be completed by the Co-Op Employer} 
-	\newline\newline
-	I approve the release of this report to the University of Victoria for evaluation purposes only. 
-	\newline\newline
-	The report is to be considered: \quad \Square{} NOT CONFIDENTIAL \quad \Square{} CONFIDENTIAL
-	\newline\newline
-	Signature: \blankline{} Position: \blankline{} Date: \blankline{} \newline\newline
-	Name (print): \blankline{} E-Mail: \blankline{} Fax \#: \blankline{} 
-	\newline\newline
-	If a report is deemed CONFIDENTIAL, a non-disclosure form signed by an evaluator will be faxed to the employer. The report will be destroyed following evaluation. If the report is NOT CONFIDENTIAL, it will be returned to the student following evaluation.
-\end{ApprovalBox}
-
-\end{center}
+\include{sections/titlepage}
 
 %%%%%%%%%%%%%%%%%%%%%%%
 %    Front matter
@@ -230,7 +170,7 @@ Bachelor of Engineering Degree\\
 \newpage
 \pagenumbering{arabic}	% 1, 2, 3, ... page numbering
 
-\include{sections/body}
+\include{sections/body} % consider using one file per section in the body
 
 
 %%%%%%%%%%%%%%%%%%%%%%%
