@@ -4,18 +4,11 @@ language:
 before_install:
   - sudo add-apt-repository -y ppa:texlive-backports/ppa
   - sudo apt-get -qq update
-  - apt-cache search biber # I'll find you, biber!
-  - sudo apt-get install -y biber
-  - sudo apt-get install -y texlive
-  - sudo apt-get install -y texlive-latex-extra texlive-fonts-extra
-  - sudo apt-get install -y texlive-science
-  - sudo apt-get install -y biblatex texlive-bibtex-extra
   - sudo apt-get install -y chktex
 
 install: true
 
 script:
-  - make
   - cd template
   - chktex -W #print version
   - chktex -q wt_template.tex letter/letter_of_transmittal.tex 2> /dev/null | tee lint.out
