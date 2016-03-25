@@ -3,44 +3,45 @@
 \usepackage[margin=1in]{geometry}
 \usepackage[inline]{enumitem}		% only included for demo letter -- delete it
 
-\signature
-	{	% my signature
-		Your Name \\ 
-		University of Victoria \\ 
-		Something Engineering student \\
-		Term XX  % e.g. 2A
-	}
-\address
-	{	% my address
-		123 Fake St \\ 
-		Victoria, BC \\ 
-		H0H 0H0
-	}
+\signature{
+	% my signature
+	Your Name \\
+	University of Victoria \\
+	Something Engineering student \\
+	Term XX  % e.g. 2A
+}
+
+\address{
+	% my address
+	123 Fake St \\
+	Victoria, BC \\
+	H0H 0H0
+}
 
 \begin{document}
 
-\begin{letter}
-	{	% addressee
-		My Coordinator \\
-		Co-op Coordinator \\
-		Faculty of Engineering \\ 
-		University of Victoria \\
-		P.O. Box 1700 \\
-		Victoria, BC \\ 
-		V8W 2Y2
-	}
+\begin{letter}{
+ % addressee
+	My Coordinator \\
+	Co-op Coordinator \\
+	Faculty of Engineering \\
+	University of Victoria \\
+	P.O. Box 1700 \\
+	Victoria, BC \\
+	V8W 2Y2
+}
 
 \opening{Dear My Coordinator}
 
 Here is a bunch of stuff to include in the letter:
-\begin{enumerate*}[label=(\roman*)]
+\begin{enumerate*}[label= (\roman*)]
 	\item The title of the report
 	\item  Your work term number (first, second, third, etc.)
 	\item  Your year and discipline, eg. 3A Mechanical, 2B Electrical
 	\item  The name and location of your employer
 	\item  The main activity of your employer
 	\item  Your project or area of work
-	\item  The scope of the report, i.e. what facets of the problem are discussed
+	\item  The scope of the report, i.e.\ what facets of the problem are discussed
 	\item  Disclaimers, special problems encountered, or extenuating circumstances, if applicable
 	\item  A statement that the report is confidential, if it is
 	\item  Acknowledgements of helpful people, groups or organizations

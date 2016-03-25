@@ -14,16 +14,16 @@
 			amsmath,			% math operators
 			amssymb,			% math symbols
 			wasysym,			% Square and XBox for approval form
-			}		
+			}
 
 %% Graphics
 %% --------------------
 \usepackage{
 			graphicx,			% allows insertion of images
 			subfigure,			% allows subfigures (a), (b), etc.
-			}				
-\graphicspath{ {graphics/} }	% (graphicx) relative path to graphics folder				
-	
+			}
+\graphicspath{ {graphics/} }	% (graphicx) relative path to graphics folder
+
 %% Tables
 %% --------------------------
 \usepackage{
@@ -33,44 +33,44 @@
 
 %% Layout Alteration
 %% --------------------------
-\usepackage{			
+\usepackage{
 			enumitem,			% indented items for glossary
 			framed,				% nice boxes; used in Supervisor's Approval
 			geometry,			% change the margins for specific PAGES
 			}
-\setlist[description]{style=nextline} 
+\setlist[description]{style=nextline}
 \geometry{						% specify page size options for (geometry)
 			a4paper, 			% paper size
 			margin=1in,			% specified independently with hmargin vmargin
-		 }				
+		 }
 
 %% Units
 %% --------------------------
 \usepackage{
 			siunitx,			% has S (decimal align) column type
 			}
-\sisetup{input-symbols = {()},  % do not treat "(" and ")" in any special way
+\sisetup{input-symbols = { () },  % do not treat "(" and ")" in any special way
          group-digits  = false, % no grouping of digits
 %		 load-configurations = abbreviations,
 %		 per-mode = symbol,
 		 }
-		 
+
 %% Misc
 %% --------------------------
 \usepackage{
 			pdfpages,			% import pdfs into this document -- used for the Letter
 			url,				% allows urls to be added to document
 			}
-			
+
 %% Bibliography
-%% --------------------------	
+%% --------------------------
 \usepackage[
 	backend=biber,
 	style=ieee]
 {biblatex}
 \addbibresource{wt_template.bib}
-			
-			 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%
 % Macros and Commands
 %%%%%%%%%%%%%%%%%%%%%%%
@@ -84,12 +84,12 @@
 % Set up page numbering for appendices as (Appendix Letter) - (Page Number)
 \providecommand{\StartAppendices}{
     \newpage
-    \newcounter{AppendixCounter}	
-    \renewcommand{\thepage}{\Alph{AppendixCounter} - \arabic{page}}
+    \newcounter{AppendixCounter}
+    \renewcommand{\thepage}{\Alph{AppendixCounter} \textendash\ \arabic{page}}
 }
-	
+
 % Manually construct the section title for each appendix and then
-% add an entry to the ToC 
+% add an entry to the ToC
 \providecommand{\Appendix}[1]{
     \newpage
     \stepcounter{AppendixCounter}
@@ -107,8 +107,8 @@
 \newenvironment{Summary}
 	{ % beginning formatting
 		% manually add entry to the toc since section*
-		% suppresses addition to toc 
-		\addcontentsline{toc}{section}{Summary}	
+		% suppresses addition to toc
+		\addcontentsline{toc}{section}{Summary}
 		\topskip0pt				% remove top padding
 		\vspace*{\stretch{2}}	% Pad 2/3 of the page length
 		\section*{Summary}		% don't append a section number before "Summary"
@@ -120,8 +120,8 @@
 % Hides the formatting for the glossary
 \newenvironment{Glossary}
 	{ 	%beginning formatting
-		\addcontentsline{toc}{section}{Glossary}	
- 		\section*{Glossary}	
+		\addcontentsline{toc}{section}{Glossary}
+ 		\section*{Glossary}
 		\begin{description}
 	}
 	{
@@ -184,7 +184,7 @@
 % 	  Back Matter
 %%%%%%%%%%%%%%%%%%%%%%%
 
-\StartAppendices
+\StartAppendices\
 \include{sections/appendix}
 
 \end{document}
