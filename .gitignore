@@ -11,7 +11,8 @@
 *.bst
 *-blx.bib
 *.bcf
-work term report template/wt_template.pdf
+template/wt_template.pdf
+template/letter/letter_of_transmittal.pdf
 
 # unsynced directories
 _*

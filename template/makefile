@@ -3,9 +3,9 @@ BIB = biber
 
 REPORT = wt_template
 BIBFILE = $(REPORT)
-ARTIFACTS := *.aux *.log *.bbl *.bcf *.blg *.out *.lot *.lof *.xml *.toc
+ARTIFACTS := *.aux *.log *.bbl *.bcf *.blg *.out *.lot *.lof *.xml *.toc *.gz
 
-all: $(REPORT).pdf 
+all: $(REPORT).pdf
 
 clean:
 	rm -fv $(ARTIFACTS) $(REPORT).pdf
