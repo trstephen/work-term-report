@@ -3,11 +3,13 @@ Uvic Co-op Work Term Template
 [![Build Status](https://travis-ci.org/trstephen/work-term-report.svg?branch=master)](https://travis-ci.org/trstephen/work-term-report)
 
 A set of LaTeX files that generates a work term report following the Uvic co-op
-department's [style guide](https://www.uvic.ca/coopandcareer/assets/docs/studentsalumni/engineering_work_term_report_guide.pdf).
+department's [style guide](https://www.uvic.ca/coopandcareer/assets/docs/forms/engrcompsci-forms/engineering_work_term_report_guide.pdf).
 A [full installation of LaTeX](http://latex-project.org/ftp.html) is recommended.
 
+The report looks like [this](./template/wt_template_demo.pdf).
+
 ## Installation
-##### OSX & Unix
+### OSX & Unix
 ```bash
 git clone git@github.com:trstephen/work-term-report.git ~/<whatever>
 cd ~/<whatever>
@@ -17,8 +19,17 @@ make
 `make` will create `wt_template.pdf` and `letter/letter_of_transmittal.pdf` which
 match their `*_demo.pdf` counterparts.
 
-##### Windows
+### Windows
 Use your favorite Tex IDE to create the report. Use `Biber` for the bibliography.
+
+## Renaming the template
+You'll probably want to rename the project as something other than `wt_template`.
+You'll need to change a few links in the file.
+
+1. `wt_template.tex -> report.tex`
+1. `wt_template.bib -> report.bib`
+1. [`\addbibresource{wt_template.bib}`](./template/wt_template.tex#L71)` -> \addbibresource{report.bib}`
+1. Links in the makefiles, if you use them
 
 ## Tips for maintaining a large text document in git
 1. I've found it helpful to break up large reports into several files each covering
