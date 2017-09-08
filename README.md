@@ -10,10 +10,10 @@ The report looks like [this](./template/wt_template_demo.pdf).
 
 ## Installation
 ### OSX & Unix
-```bash
-git clone git@github.com:trstephen/work-term-report.git ~/<whatever>
-cd ~/<whatever>
-make
+```shell
+$ git clone git@github.com:trstephen/work-term-report.git ~/<whatever>
+$ cd ~/<whatever>
+$ make
 ```
 
 `make` will create `wt_template.pdf` and `letter/letter_of_transmittal.pdf` which
@@ -23,13 +23,20 @@ match their `*_demo.pdf` counterparts.
 Use your favorite Tex IDE to create the report. Use `Biber` for the bibliography.
 
 ## Renaming the template
-You'll probably want to rename the project as something other than `wt_template`.
-You'll need to change a few links in the file.
+You'll probably want to rename the project to something other than `wt_template`.
+A few parts of the project need to be changed on rename:
 
 1. `wt_template.tex -> report.tex`
 1. `wt_template.bib -> report.bib`
-1. [`\addbibresource{wt_template.bib}`](./template/wt_template.tex#L71)` -> \addbibresource{report.bib}`
+1. [`\addbibresource{wt_template.bib}`](./template/wt_template.tex#L70)` -> \addbibresource{report.bib}`
 1. Links in the makefiles, if you use them
+
+If you're on OSX you can use [`rename.sh`](./rename.sh) to automate this process. Removing the [`''` here ](./rename.sh#L21-L22) will make the script work for non-BSD versions of `sed`.
+
+```shell
+# Change all references to `wt_template`
+$ ./rename.sh my_report
+```
 
 ## Tips for maintaining a large text document in git
 1. I've found it helpful to break up large reports into several files each covering
